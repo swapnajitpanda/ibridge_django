@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+      integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      header {
+        height: 10vh;
+        width: 100%;
+        /* border: 2px solid black; */
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        box-shadow: 0px 2px 5px grey;
+      }
+
+      header a,img {
+        height: 90%;
+
+        /* border: 2px solid red; */
+      }
+      header nav {
+        height: 100%;
+        width: 50%;
+        /* border: 2px solid blue; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      header nav form {
+        height: 60%;
+        width: 60%;
+        border: 2px solid grey;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        border-radius: 30px;
+        background-color: black;
+        border: none;
+      }
+      header nav form i {
+        font-size: 16px;
+        margin-left: 10px;
+        color: grey;
+      }
+      header nav form input {
+        height: 90%;
+        width: 90%;
+        font-size: 20px;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        color: white;
+      }
+      header nav form input::placeholder{
+        color: rgb(192, 190, 190);
+        opacity: 0.5;
+        font-size: 16px;
+      }
+      header article{
+        height: 55px;
+        width: 55px;
+        /* border: 2px solid red; */
+      }
+      header article img{
+        height: 100%;
+        width: 100%;
+        /* background-color: yellow; */
+        border-radius: 50%;
+      }
+
+      main {
+        min-height: 82vh;
+        width: 100%;
+        /* border: 2px solid red; */
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 50px 0px;
+      }
+      main table {
+        height: 80%;
+        width: 80%;
+        border: 2px solid black;
+        border-collapse: collapse;
+      }
+      main table tr {
+        height: 45px;
+        transition: 0.5;
+      }
+      table,
+      th,
+      tr,
+      td {
+        border: 1px solid grey;
+        text-align: center;
+      }
+      main table th {
+        background-color: black;
+        color: white;
+      }
+      main table tr:nth-child(even) {
+        background-color: bisque;
+      }
+      main table tr:hover {
+        background-color: green;
+        color: white;
+      }
+
+      footer{
+        height: 8vh;
+        width: 100%;
+        /* border: 2px solid blue; */
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+      }
+      footer .pagination{
+        height: 90%;
+        width: 80%;
+        /* border: 2px solid red; */
+        /* box-shadow: 0px 0px 5px grey; */
+        /* background-color:whitesmoke; */
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        /* border-radius: 40px; */
+      }
+      footer .pagination .previous, .current, .next{
+        height: 100%;
+        width: 30%;
+        /* border: 2px solid yellow; */
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+      footer .current{
+        color: black;
+        font-size: 22px;
+      }
+     
+      footer .pagination  a{
+        display: block;
+        height: 30px;
+        width: 150px;
+        background-color: black;
+        text-decoration: none;
+        border-radius: 20px;
+        text-align: center;
+        align-content: center;
+        color: white;
+        text-transform: capitalize;
+        box-shadow: 2px 2px 5px grey;
+      }
+
+
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="/show_data/">
+        <img
+        src="https://ibridge360.com/wp-content/uploads/2024/02/final-illustrator-logo-1-1.png"
+        alt=""
+      />
+      </a>
+
+      <nav>
+        <form action="/show_data/" method="GET">
+          <i class="fa-solid fa-magnifying-glass" ></i>
+
+          <input
+            type="text"
+            name="q"
+            placeholder="Please Search here by User ID..."
+            value="{{ query|default:'' }}"
+          />
+          <!-- <button type="submit">Search</button> -->
+        </form>
+      </nav>
+
+      <article>
+        <img src="https://ibridge360.com/wp-content/uploads/2024/03/8-1.png" alt="">
+      </article>
+    </header>
+
+    <main>
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>RECORDED DATA</th>
+          <th>USER-ID</th>
+          <th>MINUTES</th>
+          <th>INSERTED-AT</th>
+          <th>UPDATED-AT</th>
+        </tr>
+        {% for i in records %}
+        <tr>
+          <td>{{i.id}}</td>
+          <td>{{i.recordeddate}}</td>
+          <td>{{i.user_id}}</td>
+          <td>{{i.minutes}}</td>
+          <td>{{i.inserted_at}}</td>
+          <td>{{i.updated_at}}</td>
+        </tr>
+
+        {% endfor %}
+      </table>
+    </main>
+
+
+    <footer>
+
+<!-- Pagination controls -->
+<div class="pagination">
+   
+        <div class="previous">
+            {% if records.has_previous %}
+            <a href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&laquo; first</a>
+            <a href="?page={{ records.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+            {% endif %}
+
+        </div>
+
+        <div class="current">
+            Page {{ records.number }} of {{ records.paginator.num_pages }}.
+        </div>
+
+        <div class="next">
+            {% if records.has_next %}
+            <a href="?page={{ records.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
+            <a href="?page={{ records.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">last &raquo;</a>
+        {% endif %}
+        </div>
+   
+</div>
+
+    </footer>
+
+
+  </body>
+</html>
