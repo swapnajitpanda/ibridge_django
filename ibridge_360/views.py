@@ -24,6 +24,8 @@ def show_data(request):
     page_number = request.GET.get('page')  # Get the page number from GET parameters
     paginator = Paginator(last_data, 10)  # Show 10 records per page
 
+    print('Page Number: ', page_number)
+
     try:
         page_obj = paginator.get_page(page_number)
     except Exception as e:
